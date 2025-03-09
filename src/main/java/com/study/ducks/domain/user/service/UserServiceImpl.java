@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 
         Optional<User> user = userRepository.findByLoginId(userSignupRequest.loginId());
 
-        //if(user.isPresent()) throw new isExistedUser();
+        //if(user.isPresent()) throw new IsExistedUser();
         //todo exception 관련 작업 후 적용 예정
 
         String encode = passwordEncoder.encode(userSignupRequest.password());
