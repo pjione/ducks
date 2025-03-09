@@ -4,6 +4,7 @@ import com.study.ducks.domain.user.dto.UserSignupRequest;
 import com.study.ducks.domain.user.dto.UserSignupResponse;
 import com.study.ducks.domain.user.entity.User;
 import com.study.ducks.domain.user.repository.UserRepository;
+import com.study.ducks.exception.custom.IsExistedUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,7 @@ public class UserServiceImpl implements UserService{
 
         Optional<User> user = userRepository.findByLoginId(userSignupRequest.loginId());
 
-        //if(user.isPresent()) throw new IsExistedUser();
-        //todo exception 관련 작업 후 적용 예정
+        if(user.isPresent()) throw new IsExistedUser();
 
         String encode = passwordEncoder.encode(userSignupRequest.password());
 

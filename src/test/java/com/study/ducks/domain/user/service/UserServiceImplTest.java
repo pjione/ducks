@@ -3,6 +3,7 @@ package com.study.ducks.domain.user.service;
 import com.study.ducks.domain.user.dto.UserSignupRequest;
 import com.study.ducks.domain.user.entity.User;
 import com.study.ducks.domain.user.repository.UserRepository;
+import com.study.ducks.exception.custom.IsExistedUser;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -66,9 +68,8 @@ class UserServiceImplTest {
                 .build();
 
         //then
-        //assertThatThrownBy(() -> userService.signup(userSignupRequest))
-        //        .isInstanceOf(IsExistedUser.class)
-        //        .message("이미 존재하는 아이디입니다.");
-        //todo exception 관련 작업 후 적용 예정
+        assertThatThrownBy(() -> userService.signup(userSignupRequest))
+                .isInstanceOf(IsExistedUser.class)
+                .hasMessage("이미 존재하는 아이디입니다.");
     }
 }
