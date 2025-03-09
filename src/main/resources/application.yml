@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: ducks
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: true
+server:
+  servlet:
+    session:
+      cookie:
+        path: /
+        http-only: true
+        secure: true
+
+springdoc:
+  packages-to-scan: com.study.ducks
+  default-consumes-media-type: application/json;
+  default-produces-media-type: application/json;
+  show-actuator: true
+  swagger-ui:
+    path: /api/docs
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: method
+    tags-sorter: alpha
+    default-model-expand-depth: 2
+
+
+
