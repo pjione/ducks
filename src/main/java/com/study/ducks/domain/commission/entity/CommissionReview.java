@@ -1,7 +1,7 @@
 package com.study.ducks.domain.commission.entity;
 
 import com.study.ducks.common.BaseTimeEntity;
-import com.study.ducks.domain.user.entity.User;
+import com.study.ducks.domain.user.entity.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,10 +26,10 @@ public class CommissionReview extends BaseTimeEntity {
     private Commission commission;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private Users user;
 
     @Builder
-    public CommissionReview(byte rating, String comment, Commission commission, User user) {
+    public CommissionReview(byte rating, String comment, Commission commission, Users user) {
         this.rating = rating;
         this.comment = comment;
         this.commission = commission;

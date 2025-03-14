@@ -1,7 +1,7 @@
 package com.study.ducks.domain.user.service;
 
 import com.study.ducks.domain.user.dto.UserSignupRequest;
-import com.study.ducks.domain.user.entity.User;
+import com.study.ducks.domain.user.entity.Users;
 import com.study.ducks.domain.user.repository.UserRepository;
 import com.study.ducks.exception.custom.IsExistedUser;
 import jakarta.persistence.EntityManager;
@@ -44,7 +44,7 @@ class UserServiceImplTest {
         userService.signup(userSignupRequest);
 
         //then
-        List<User> users = userRepository.findAll();
+        List<Users> users = userRepository.findAll();
 
         assertThat(users.size()).isEqualTo(1);
         assertThat(userRepository.count()).isEqualTo(1);
@@ -56,7 +56,7 @@ class UserServiceImplTest {
     @DisplayName("아이디 중복으로 인한 회원가입 실패")
     void signupFailedByDuplicateLoginId() {
         //given
-        User user = User.builder()
+        Users user = Users.builder()
                 .loginId("test")
                 .password("1234")
                 .build();
