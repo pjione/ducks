@@ -2,7 +2,7 @@ package com.study.ducks.domain.commission.entity;
 
 import com.study.ducks.common.BaseTimeEntity;
 import com.study.ducks.domain.commission.enums.CommissionStatus;
-import com.study.ducks.domain.user.entity.User;
+import com.study.ducks.domain.user.entity.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 public class CommissionUser extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commissionUserId;
+    private Long commissionUsersId;
 
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, length = 50)
@@ -29,10 +29,10 @@ public class CommissionUser extends BaseTimeEntity {
     private Commission commission;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private Users user;
 
     @Builder
-    public CommissionUser(CommissionStatus commissionStatus, LocalDateTime complete_at, Commission commission, User user) {
+    public CommissionUser(CommissionStatus commissionStatus, LocalDateTime complete_at, Commission commission, Users user) {
         this.commissionStatus = commissionStatus;
         this.complete_at = complete_at;
         this.commission = commission;
