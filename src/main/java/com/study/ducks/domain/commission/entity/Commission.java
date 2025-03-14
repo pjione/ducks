@@ -38,5 +38,10 @@ public class Commission extends BaseTimeEntity {
         this.commissionStatus = commissionStatus;
         this.users = users;
     }
+    public void update(String title, String content, CommissionStatus commissionStatus) {
+        this.title = title;
+        this.content = content;
+        this.commissionStatus = commissionStatus;
+    }
 
 }
