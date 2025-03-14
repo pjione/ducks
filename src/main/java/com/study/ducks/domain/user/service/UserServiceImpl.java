@@ -35,6 +35,6 @@ public class UserServiceImpl implements UserService{
                 .password(encode)
                 .build());
 
-        return new UserSignupResponse(signUpUser.getUserId(), signUpUser.getLoginId());
+        return new UserSignupResponse(signUpUser.getUsersId(), signUpUser.getLoginId());
     }
 }
