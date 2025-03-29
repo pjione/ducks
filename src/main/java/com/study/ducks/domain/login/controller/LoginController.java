@@ -1,25 +1,32 @@
 package com.study.ducks.domain.login.controller;
 
+import com.study.ducks.domain.login.dto.KakaoUserInfoResponse;
 import com.study.ducks.domain.login.dto.LoginRequest;
 import com.study.ducks.domain.login.dto.LoginResponse;
 import com.study.ducks.domain.login.service.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "로그인 API", description = "로그인 API 입니다.")
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class LoginController {
+    @Value("${spring.kakao.auth.client}")
+    private String clientId;
+    @Value("${spring.kakao.auth.redirect}")
+    private String redirectUrl;
 
     private final LoginService loginService;
 

@@ -1,5 +1,6 @@
 package com.study.ducks.domain.login.service;
 
+import com.study.ducks.domain.login.dto.KakaoUserInfoResponse;
 import com.study.ducks.domain.login.dto.LoginRequest;
 import com.study.ducks.domain.login.dto.LoginResponse;
 import com.study.ducks.domain.user.entity.Users;
@@ -19,6 +20,7 @@ public class LoginServiceImpl implements LoginService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SocialLoginService socialLoginService;
 
     @Override
     public LoginResponse loginProcess(LoginRequest loginRequest) {
