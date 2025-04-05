@@ -3,6 +3,7 @@ package com.study.ducks.domain.login.controller;
 import com.study.ducks.domain.login.dto.KakaoUserInfoResponse;
 import com.study.ducks.domain.login.dto.LoginRequest;
 import com.study.ducks.domain.login.dto.LoginResponse;
+import com.study.ducks.domain.login.dto.SigninRequest;
 import com.study.ducks.domain.login.service.LoginService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,11 +24,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class LoginController {
-    @Value("${spring.kakao.auth.client}")
-    private String clientId;
-    @Value("${spring.kakao.auth.redirect}")
-    private String redirectUrl;
-
     private final LoginService loginService;
 
     @Operation(summary = "일반 사용자 로그인", description = "일반 사용자 로그인")
@@ -53,4 +49,12 @@ public class LoginController {
         return ResponseEntity.ok()
                 .body(loginService.loginProcess(loginRequest));
     }
+
+    @Operation(summary = "일반 사용자 회원가입", description = "사용자 회원가입")
+    @PostMapping("/auth/logout")
+    public ResponseEntity<LoginResponse> signIn(HttpServletRequest httpServletRequest, @RequestBody @Validated SigninRequest signinRequest){
+        return ResponseEntity.ok()
+                .body(loginService.signInProcess(signinRequest));
+    }
+
 }

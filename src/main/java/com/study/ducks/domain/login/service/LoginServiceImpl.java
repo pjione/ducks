@@ -1,11 +1,10 @@
 package com.study.ducks.domain.login.service;
 
-import com.study.ducks.domain.login.dto.KakaoUserInfoResponse;
-import com.study.ducks.domain.login.dto.LoginRequest;
-import com.study.ducks.domain.login.dto.LoginResponse;
+import com.study.ducks.domain.login.dto.*;
 import com.study.ducks.domain.user.entity.Users;
 import com.study.ducks.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,8 @@ public class LoginServiceImpl implements LoginService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final SocialLoginService socialLoginService;
+    private final ModelMapper modelMapper;
+
 
     @Override
     public LoginResponse loginProcess(LoginRequest loginRequest) {
@@ -59,4 +59,20 @@ public class LoginServiceImpl implements LoginService{
     @Override
     public void logoutProcess(LoginRequest loginRequest) {
     }
+
+    @Override
+    public LoginResponse signInProcess(SigninRequest signinRequest) {
+        Users users = modelMapper.map(signinRequest, Users.class);
+        LoginResponse loginResponse = modelMapper.map(userRepository.save(users), LoginResponse.class);
+
+        return loginResponse;
+    }
+
+    @Override
+    public LoginResponse singOutProcess(Long id) {
+        return null;
+    }
+
+
+
 }
